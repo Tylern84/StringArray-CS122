@@ -41,9 +41,25 @@ public class StringOps {
      * @param r           - the end (exclusive) of the search range
      * @return the index of the query in the array or -1 if not found.
      */
+    //negative # = A.compareto(B) <0
+//Positive # = B.compareto(A) >0
+//0 = A.compareto(A)
     public int binarySearch(String[] sortedArray, String query, int l, int r) {
-        // TODO: implement this
-        return 0;
+        if(r>=l){
+            int mid = (l+r)/ 2;
+            if(sortedArray[mid].equals(query)){
+                System.out.println(mid);
+                return mid;
+            }
+            if (sortedArray[mid].compareTo(query) < 0) {
+                return binarySearch(sortedArray,query,mid+1,r);
+
+            }
+            else if (sortedArray[mid].compareTo(query)  > 0) {
+                return binarySearch(sortedArray,query,l,r-1);
+            }
+        }
+        return -1;
     }
 
     /**
@@ -57,28 +73,20 @@ public class StringOps {
      * @param array - the array of Strings to sort
      */
     public void swapemSort(String[] array) {
-//        for(int i= array.length-1; i > 0;i--){
-//            int j=i;
-//            while (array[j-1].compareTo(array[j]) < 0){
-//                String placeHolder= array[j];
-//                array[j]=array[j-1];
-//                array[j-1]= placeHolder;
-//            }
-//        }
         boolean Sorted = false;
         while (!Sorted) {
             Sorted=true;
             for (int i = 1; i < array.length; i++) {
                 if (array[i - 1].compareTo(array[i]) > 0) {
-                    String temp = array[i - 1];
+                    String placeHolder = array[i - 1];
                     array[i - 1] = array[i];
-                    array[i] = temp;
+                    array[i] = placeHolder;
                     Sorted = false;
                 }
 
             }
         }
-        // TODO: implement this
+//         TODO: implement this
         return;
     }
 
@@ -92,9 +100,20 @@ public class StringOps {
      * @param array - the array of Strings to sort
      */
     public void insertSort(String[] array) {
-        // TODO: implement this
+        int lengthArray= array.length;
+        for(int i = 1; i < lengthArray; i++){
+            int ptr1 = i;
+            int ptr2 = i - 1;
+            while(ptr2>= 0 && array[ptr1].compareTo(array[ptr2]) < 0){
+                String placeHolder = array[ptr1];
+                array[ptr1] = array[ptr2];
+                array[ptr2]= placeHolder;
+                ptr2--;
+                ptr1--;
+            }
+        }
         return;
-    }
+    }  
 
     /**
      * _ Part 5: Implement this method _
@@ -121,6 +140,7 @@ public class StringOps {
      * @return a new array holding all unique items in array1 and array2
      */
     public String[] union(String[] array1, String[] array2) {
+        
         // TODO: implement this
         return null;
     }
